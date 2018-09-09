@@ -40,6 +40,7 @@ import org.kde.kdeconnect.Plugins.SftpPlugin.SftpPlugin;
 import org.kde.kdeconnect.Plugins.SharePlugin.SharePlugin;
 import org.kde.kdeconnect.Plugins.TelepathyPlugin.TelepathyPlugin;
 import org.kde.kdeconnect.Plugins.TelephonyPlugin.TelephonyPlugin;
+import org.kde.kdeconnect.Plugins.UnlockPlugin.UnlockPlugin;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -130,6 +131,7 @@ public class PluginFactory {
         PluginFactory.registerPlugin(RunCommandPlugin.class);
         PluginFactory.registerPlugin(RemoteKeyboardPlugin.class);
         //PluginFactory.registerPlugin(MprisReceiverPlugin.class);
+        PluginFactory.registerPlugin(UnlockPlugin.class);
     }
 
     public static PluginInfo getPluginInfo(Context context, String pluginKey) {
@@ -214,7 +216,8 @@ public class PluginFactory {
             PluginInfo plugin = getPluginInfo(context, pluginId);
             //Check incoming against outgoing
             if (Collections.disjoint(outgoing, plugin.getSupportedPacketTypes())
-                    && Collections.disjoint(incoming, plugin.getOutgoingPacketTypes())) {
+                    && Collections.disjoint(incoming, plugin.getOutgoingPacketTypes())
+                    && !pluginId.equals(UnlockPlugin.class.getSimpleName())) {
                 Log.i("PluginFactory", "Won't load " + pluginId + " because of unmatched capabilities");
                 continue; //No capabilities in common, do not load this plugin
             }

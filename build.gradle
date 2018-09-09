@@ -14,7 +14,7 @@ android {
     buildToolsVersion '27.0.3'
     compileSdkVersion 25
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion 24
         targetSdkVersion 25
         //multiDexEnabled true
         //testInstrumentationRunner "com.android.test.runner.MultiDexTestRunner"
